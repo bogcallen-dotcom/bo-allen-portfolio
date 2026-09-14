@@ -538,21 +538,45 @@
   @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
 
   /* ---------- SCROLL REVEAL ---------- */
-  .card, .step-card, .tl-item, .company-banner{
+  .card, .tl-item, .company-banner{
     opacity:0;
     transform:translateY(26px);
     transition:opacity .7s ease, transform .7s ease;
   }
-  .card.in-view, .step-card.in-view, .tl-item.in-view, .company-banner.in-view{
+  .card.in-view, .tl-item.in-view, .company-banner.in-view{
     opacity:1;
     transform:translateY(0);
   }
-  .steps-grid .step-card:nth-child(2){ transition-delay:.08s; }
-  .steps-grid .step-card:nth-child(3){ transition-delay:.16s; }
   .projects .card.project:nth-child(2){ transition-delay:.08s; }
   .projects .card.project:nth-child(3){ transition-delay:.16s; }
   @media (prefers-reduced-motion: reduce){
-    .card, .step-card, .tl-item, .company-banner{ opacity:1; transform:none; transition:none; }
+    .card, .tl-item, .company-banner{ opacity:1; transform:none; transition:none; }
+  }
+
+  /* ---------- PROCESS SECTION CHOREOGRAPHED REVEAL ---------- */
+  .process-anim .step-connector{ transform:scaleX(0); transform-origin:left; transition:transform .45s ease; }
+  .process-anim.in-view .step-connector.sc1{ transform:scaleX(1); transition-delay:.1s; }
+  .process-anim.in-view .step-connector.sc2{ transform:scaleX(1); transition-delay:.55s; }
+
+  .process-anim .step-node{ opacity:0; transform:scale(.55); transition:opacity .3s ease, transform .3s ease; }
+  .process-anim.in-view .step-node.n1{ opacity:1; transform:scale(1); transition-delay:0s; }
+  .process-anim.in-view .step-node.n2{ opacity:1; transform:scale(1); transition-delay:.45s; }
+  .process-anim.in-view .step-node.n3{ opacity:1; transform:scale(1); transition-delay:.9s; }
+
+  .process-anim .step-card{ opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease; }
+  .process-anim.in-view .steps-grid .step-card:nth-child(1){ opacity:1; transform:translateY(0); transition-delay:1s; }
+  .process-anim.in-view .steps-grid .step-card:nth-child(2){ opacity:1; transform:translateY(0); transition-delay:1.07s; }
+  .process-anim.in-view .steps-grid .step-card:nth-child(3){ opacity:1; transform:translateY(0); transition-delay:1.14s; }
+
+  .process-anim .check-list li{ opacity:0; transform:translateY(6px); transition:opacity .3s ease, transform .3s ease; }
+  .process-anim.in-view .check-list li:nth-child(1){ opacity:1; transform:translateY(0); transition-delay:1.3s; }
+  .process-anim.in-view .check-list li:nth-child(2){ opacity:1; transform:translateY(0); transition-delay:1.37s; }
+  .process-anim.in-view .check-list li:nth-child(3){ opacity:1; transform:translateY(0); transition-delay:1.44s; }
+
+  @media (prefers-reduced-motion: reduce){
+    .process-anim .step-connector, .process-anim .step-node, .process-anim .step-card, .process-anim .check-list li{
+      opacity:1; transform:none; transition:none;
+    }
   }
   @media (prefers-reduced-motion: reduce){ .reveal{ animation:none; opacity:1; transform:none; } html{ scroll-behavior:auto; } }
 
@@ -615,8 +639,8 @@
   <div class="wrap">
     <div>
       <div class="eyebrow reveal"><span class="num">01</span><span class="rule"></span>NATURAL SCIENCES · UCL</div>
-      <h1 class="reveal d1">Reads a titration curve and a P&amp;L with the same patience.</h1>
-      <p class="hero-sub reveal d2">I'm Bo — a chemistry and biomedical sciences student who spends as much time in insight programmes and spreadsheets as I do in the lab. I like problems where the evidence is messy and the answer has to hold up.</p>
+      <h1 class="reveal d1">Where science, technology and business connect.</h1>
+      <p class="hero-sub reveal d2">I'm Bo, a Natural Sciences student at UCL studying organic chemistry and biomedical sciences alongside programming and data. I'm interested in where technical ideas meet real-world problems — particularly across technology, data, strategy and applied science.</p>
       <div class="hero-actions reveal d3">
         <a href="mailto:bo.gcallen@gmail.com" class="btn btn-primary">Get in touch</a>
         <a href="#experience" class="btn-ghost-link">See my work ↗</a>
@@ -670,11 +694,12 @@
 <section id="story">
   <div class="wrap">
     <div class="story-body">
-      <p class="pull">"Two disciplines, <span>one method</span> — ask what the data actually supports, then say it plainly."</p>
+      <p class="pull">A bit about me</p>
       <div>
-        <p>I started at UCL wanting to understand how molecules behave under pressure. Three insight programmes later — in procurement, audit, actuarial risk and equity research — I've found the same instinct shows up everywhere: gather the evidence, be honest about its limits, and only then make the call.</p>
-        <p>At Rolls-Royce I looked at how engineering trade-offs get priced into supplier decisions. At Legal &amp; General I ran R models on healthcare claims and had to defend them to people who'd ask harder questions than my tutors. At KPMG and Panmure Gordon I learned how automation and macro trends actually move through a business, not just a textbook.</p>
-        <p>Outside the CV, I build small web tools in Python when I want to see an idea working end to end, and I still play piano seriously enough that Wigmore Hall didn't feel like a fluke.</p>
+        <p>I chose Natural Sciences because I didn't want to study just one subject. At UCL, I've combined chemistry and biomedical sciences with programming, which has given me a mix of scientific, quantitative and technical experience.</p>
+        <p>Outside university, I've deliberately explored very different industries. At Legal &amp; General, I used R to analyse the potential insurance implications of obesity drugs. At KPMG, I explored how AI could affect different areas of professional services. I've also gained exposure to investment research and I'm continuing to explore engineering and technology.</p>
+        <p>Alongside that, I enjoy making things myself. I've worked on a travel-planning web application, built websites and used Python and R for smaller analytical projects.</p>
+        <p>I don't see science, technology and business as completely separate interests. What interests me most is where they overlap.</p>
       </div>
     </div>
 
@@ -693,60 +718,65 @@
 <section class="alt" id="process">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow" style="justify-content:center;"><span class="num">02</span><span class="rule"></span>HOW I WORK</div>
-      <h2>Three habits, one method.</h2>
-      <p class="lede">The same approach shows up whether I'm in a lab, a dataset, or a client meeting.</p>
+      <div class="eyebrow" style="justify-content:center;"><span class="num">02</span><span class="rule"></span>WHAT I'M INTERESTED IN</div>
+      <h2>Where science, technology and business overlap.</h2>
+      <p class="lede">The work I'm most drawn to tends to connect these three areas.</p>
     </div>
 
-    <div class="steps-line">
-      <div class="step-node n1">01</div>
-      <div class="step-connector sc1"></div>
-      <div class="step-node n2">02</div>
-      <div class="step-connector sc2"></div>
-      <div class="step-node n3">03</div>
-    </div>
-
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-icon i1">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#7C3AED" stroke-width="1.8"/><path d="M12 7v5l3.5 2" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <div class="step-phase">Phase 1</div>
-        <h3>Evidence first</h3>
-        <span class="tag-line">From assumption to proof</span>
-        <p>Statistical machine learning and organic chemistry both punish sloppy reasoning — I check the assumption before I trust the conclusion.</p>
-        <ul class="check-list">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#7C3AED" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Statistical machine learning for biosciences at UCL</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#7C3AED" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>R models built and defended on real claims data</li>
-        </ul>
+    <div class="process-anim" id="processAnim">
+      <div class="steps-line">
+        <div class="step-node n1">01</div>
+        <div class="step-connector sc1"></div>
+        <div class="step-node n2">02</div>
+        <div class="step-connector sc2"></div>
+        <div class="step-node n3">03</div>
       </div>
 
-      <div class="step-card">
-        <div class="step-icon i2">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="13" width="4" height="7" fill="#3B82F6"/><rect x="10" y="8" width="4" height="12" fill="#3B82F6"/><rect x="16" y="4" width="4" height="16" fill="#2DD4BF"/></svg>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon i1">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="13" width="4" height="7" fill="#7C3AED"/><rect x="10" y="8" width="4" height="12" fill="#7C3AED"/><rect x="16" y="4" width="4" height="16" fill="#7C3AED"/></svg>
+          </div>
+          <div class="step-phase">Area 01</div>
+          <h3>Technology &amp; data</h3>
+          <span class="tag-line">From ideas to useful tools</span>
+          <p>I enjoy using programming and data to understand problems, automate tasks and turn ideas into something tangible.</p>
+          <ul class="check-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#7C3AED" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Python and R for analysis and technical projects</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#7C3AED" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>AI, automation and digital products</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#7C3AED" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Building web apps and experimenting with new tools</li>
+          </ul>
         </div>
-        <div class="step-phase">Phase 2</div>
-        <h3>Commercial context</h3>
-        <span class="tag-line">From analysis to decision</span>
-        <p>Four insight programmes taught me that a good analysis has to survive contact with a real decision, not just a slide.</p>
-        <ul class="check-list">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#3B82F6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Procurement &amp; supply strategy — Rolls-Royce</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#3B82F6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Actuarial risk &amp; equity research — L&amp;G, Panmure Gordon</li>
-        </ul>
-      </div>
 
-      <div class="step-card">
-        <div class="step-icon i3">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 19l6-12 4 7 4-9" stroke="#14B8A6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="step-card">
+          <div class="step-icon i2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#3B82F6" stroke-width="1.8"/><path d="M12 7v5l3.5 2" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <div class="step-phase">Area 02</div>
+          <h3>Science in practice</h3>
+          <span class="tag-line">From scientific ideas to real-world applications</span>
+          <p>Chemistry and biomedical sciences give me a strong scientific foundation, but I'm particularly interested in what happens when science moves beyond the lab.</p>
+          <ul class="check-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#3B82F6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Organic chemistry and biomedical sciences at UCL</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#3B82F6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Healthcare, biotechnology and deep tech</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#3B82F6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Engineering, robotics and emerging technologies</li>
+          </ul>
         </div>
-        <div class="step-phase">Phase 3</div>
-        <h3>Willing to build</h3>
-        <span class="tag-line">From idea to working tool</span>
-        <p>If a tool doesn't exist, I'll write one in Python or R rather than wait for the right software to appear.</p>
-        <ul class="check-list">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#14B8A6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Shipped a travel-planning web app and a portfolio site</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#14B8A6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Python scripts for data reconciliation — Deloitte simulation</li>
-        </ul>
+
+        <div class="step-card">
+          <div class="step-icon i3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 19l6-12 4 7 4-9" stroke="#14B8A6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="step-phase">Area 03</div>
+          <h3>Business &amp; strategy</h3>
+          <span class="tag-line">From analysis to decisions</span>
+          <p>My experience across different industries has made me interested in how organisations use data, technology and technical information to make better commercial decisions.</p>
+          <ul class="check-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#14B8A6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Experience across consulting, insurance and finance</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#14B8A6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Strategy around emerging technology and innovation</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#14B8A6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Understanding the commercial side of technical ideas</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -962,7 +992,7 @@
 <script>
   const siteNav = document.querySelector('.site-nav');
 
-  const revealTargets = document.querySelectorAll('.card, .step-card, .tl-item, .company-banner');
+  const revealTargets = document.querySelectorAll('.card, .tl-item, .company-banner');
   if ('IntersectionObserver' in window && revealTargets.length){
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -975,6 +1005,23 @@
     revealTargets.forEach(el => revealObserver.observe(el));
   } else {
     revealTargets.forEach(el => el.classList.add('in-view'));
+  }
+
+  const processAnim = document.getElementById('processAnim');
+  if (processAnim){
+    if ('IntersectionObserver' in window){
+      const processObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            processObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
+      processObserver.observe(processAnim);
+    } else {
+      processAnim.classList.add('in-view');
+    }
   }
 
   function setNavHeight(){

@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 
+
   :root{
     --purple:#7C3AED;
     --purple-2:#A78BFA;
@@ -108,7 +109,7 @@
     align-items:center;
     justify-content:space-between;
   }
-  .brand{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
+  .brand{ display:flex; align-items:center; gap:10px; flex-shrink:0; text-decoration:none; cursor:pointer; }
   .brand-mark{
     width:30px; height:30px;
     border-radius:8px;
@@ -191,6 +192,9 @@
   .hero .eyebrow{ color:rgba(255,255,255,0.68); }
   .hero .eyebrow .num{ color:rgba(255,255,255,0.4); }
   .hero .eyebrow .rule{ background:linear-gradient(90deg, rgba(255,255,255,0.68), transparent); }
+  .page-hero .eyebrow{ color:rgba(255,255,255,0.75); }
+  .page-hero .eyebrow .num{ color:rgba(255,255,255,0.45); }
+  .page-hero .eyebrow .rule{ background:linear-gradient(90deg, rgba(255,255,255,0.75), transparent); }
 
   /* ---------- HERO ---------- */
   .hero{
@@ -538,15 +542,16 @@
   @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
 
   /* ---------- SCROLL REVEAL ---------- */
-  .card, .tl-item, .company-banner{
+  .card, .tl-item, .company-banner, .explore-card{
     opacity:0;
     transform:translateY(26px);
     transition:opacity .7s ease, transform .7s ease;
   }
-  .card.in-view, .tl-item.in-view, .company-banner.in-view{
+  .card.in-view, .tl-item.in-view, .company-banner.in-view, .explore-card.in-view{
     opacity:1;
     transform:translateY(0);
   }
+  .explore-grid .explore-card:nth-child(2){ transition-delay:.08s; }
   .projects .card.project:nth-child(2){ transition-delay:.08s; }
   .projects .card.project:nth-child(3){ transition-delay:.16s; }
   @media (prefers-reduced-motion: reduce){
@@ -609,31 +614,166 @@
 
     .contact-top{ grid-template-columns:1fr; gap:26px; }
   }
+
+  /* ---------- PAGE HERO (Experience / Projects) ---------- */
+  .page-hero{
+    position:relative;
+    overflow:hidden;
+    margin-top:calc(-1 * var(--nav-h, 67px));
+    min-height:62vh;
+    display:flex;
+    align-items:flex-end;
+    padding:calc(150px + var(--nav-h, 67px)) 0 84px;
+  }
+  .page-hero .ph-bg{
+    position:absolute; inset:0; z-index:0;
+    background-image:var(--ph-image);
+    background-size:cover;
+    background-position:center 58%;
+    transform:scale(1.02);
+  }
+  .page-hero .ph-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:
+      linear-gradient(180deg, rgba(10,14,39,0.42) 0%, rgba(10,14,39,0.66) 58%, rgba(10,14,39,0.94) 100%),
+      linear-gradient(115deg, rgba(124,58,237,0.38), rgba(20,184,166,0.08) 55%, rgba(10,14,39,0.1));
+  }
+  .page-hero::after{
+    content:'';
+    position:absolute; left:0; right:0; bottom:0; height:2px; z-index:2;
+    background:linear-gradient(90deg, var(--purple), var(--blue), var(--teal));
+    opacity:0.7;
+  }
+  .page-hero .wrap{
+    position:relative; z-index:2;
+    text-align:center;
+    margin:0 auto;
+  }
+  .page-hero .eyebrow{ justify-content:center; }
+  .page-hero h1{
+    color:#fff;
+    font-size:clamp(2.7rem, 6vw, 4.5rem);
+    line-height:1.04;
+  }
+  .page-hero .page-sub{
+    margin:20px auto 0;
+    max-width:56ch;
+    color:rgba(255,255,255,0.78);
+    font-size:1.12rem;
+  }
+  .page-hero .page-loc{
+    margin-top:30px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 16px;
+    background:rgba(10,14,39,0.5);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:999px;
+    font-size:0.82rem;
+    color:#fff;
+  }
+  .page-loc .dot{ width:7px; height:7px; border-radius:50%; background:var(--teal); }
+
+  /* ---------- EXPLORE CARDS (index.html teaser to sub-pages) ---------- */
+  .explore-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  .explore-card{
+    display:block;
+    background:var(--paper);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:34px 32px;
+    box-shadow:0 20px 40px -30px rgba(16,12,34,0.25);
+    text-decoration:none;
+    color:inherit;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .explore-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 26px 50px -24px rgba(124,58,237,0.35);
+    border-color:var(--purple-2);
+  }
+  .explore-tag{
+    font-size:0.76rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--purple); margin-bottom:12px;
+  }
+  .explore-card h3{ font-size:1.45rem; margin-bottom:10px; }
+  .explore-card p{ color:var(--muted); font-size:0.97rem; margin:0 0 20px; }
+  .explore-link{ font-weight:700; color:var(--purple); font-size:0.94rem; display:inline-flex; align-items:center; gap:6px; transition:gap .18s ease; }
+  .explore-card:hover .explore-link{ gap:10px; }
+
+  /* ---------- PROJECT LIVE LINK ---------- */
+  .project-live{
+    display:inline-flex; align-items:center; gap:6px;
+    margin-top:16px;
+    font-weight:700; font-size:0.9rem; color:var(--purple);
+    text-decoration:none;
+  }
+  .project-live:hover{ text-decoration:underline; }
+  .project.featured{
+    grid-column:1 / -1;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:36px;
+    align-items:center;
+    padding:38px;
+    text-decoration:none;
+    color:inherit;
+    cursor:pointer;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .project.featured:hover{
+    transform:translateY(-4px);
+    box-shadow:0 26px 50px -24px rgba(124,58,237,0.35);
+    border-color:var(--purple-2);
+  }
+  .project.featured .pf-visual{
+    border-radius:14px;
+    overflow:hidden;
+    background:linear-gradient(155deg, #241553, #120a30);
+    aspect-ratio:16/10;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .project.featured .pf-visual img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .project.featured .pf-badge{
+    position:absolute; top:14px; left:14px;
+    background:rgba(10,14,39,0.65); border:1px solid rgba(255,255,255,0.2);
+    color:#fff; font-size:0.74rem; font-weight:700; letter-spacing:0.05em;
+    padding:6px 12px; border-radius:999px;
+  }
+
+  @media (max-width:940px){
+    .explore-grid{ grid-template-columns:1fr; }
+    .project.featured{ grid-template-columns:1fr; padding:26px; }
+  }
+
 </style>
 </head>
 <body>
 
 <header class="site-nav">
   <div class="nav-inner">
-    <div class="brand">
+    <a href="index.html" class="brand" aria-label="Bo Allen — back to home">
       <div class="brand-mark">BA</div>
       <div class="brand-name">Bo Allen</div>
-    </div>
+    </a>
     <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="menuBtn"><span></span></button>
     <div class="nav-cluster">
       <nav class="links" id="navLinks">
-        <a href="#story">Story</a>
-        <a href="#process">Approach</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
+        <a href="index.html#story">Story</a>
+        <a href="index.html#process">Approach</a>
+        <a href="experience.html">Experience</a>
+        <a href="projects.html">Projects</a>
       </nav>
       <div class="nav-right">
         <a href="Bo-Allen-CV.pdf" target="_blank" rel="noopener" class="nav-cv-link">CV</a>
-        <a href="#contact" class="btn btn-primary">Contact</a>
+        <a href="index.html#contact" class="btn btn-primary">Contact</a>
       </div>
     </div>
   </div>
 </header>
+
 
 <section class="hero">
   <div class="wrap">
@@ -643,7 +783,7 @@
       <p class="hero-sub reveal d2">I'm Bo, a Natural Sciences student at UCL studying organic chemistry and biomedical sciences alongside programming and data. I'm interested in where technical ideas meet real-world problems — particularly across technology, data, strategy and applied science.</p>
       <div class="hero-actions reveal d3">
         <a href="mailto:bo.gcallen@gmail.com" class="btn btn-primary">Get in touch</a>
-        <a href="#experience" class="btn-ghost-link">See my work ↗</a>
+        <a href="experience.html" class="btn-ghost-link">See my work ↗</a>
       </div>
       <div class="hero-meta reveal d4">
         <div><strong>Based in</strong>London, UK</div>
@@ -691,6 +831,8 @@
   </div>
 </section>
 
+
+
 <section id="story">
   <div class="wrap">
     <div class="story-body">
@@ -714,6 +856,8 @@
     </div>
   </div>
 </section>
+
+
 
 <section class="alt" id="process">
   <div class="wrap">
@@ -782,124 +926,32 @@
   </div>
 </section>
 
-<section id="experience">
+
+
+<section id="explore">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow" style="justify-content:center;"><span class="num">03</span><span class="rule"></span>WORK</div>
-      <h2>Experience</h2>
-      <p class="lede">Four insight programmes, four very different vantage points on how businesses actually make decisions.</p>
+      <div class="eyebrow" style="justify-content:center;"><span class="num">03</span><span class="rule"></span>DIVE DEEPER</div>
+      <h2>Explore the work in more detail.</h2>
+      <p class="lede">Four internships and a handful of builds — each gets its own page.</p>
     </div>
-    <div class="timeline">
-
-      <div class="tl-item">
-        <div class="tl-date"><div class="tl-dot"></div><span>Sep 2026</span></div>
-        <div>
-          <div class="tl-role"><h3>Intern</h3><span class="co">Rolls-Royce · Bristol</span></div>
-          <ul>
-            <li>Gained exposure to engineering, procurement and supply strategy within Rolls-Royce's aerospace operations</li>
-            <li>Evaluated supplier selection and vendor management, weighing cost, quality, risk and delivery</li>
-            <li>Explored the cost analysis and financial modelling behind procurement decisions across the supply chain</li>
-            <li>Worked across procurement, engineering and operations teams within a global organisation</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-date"><div class="tl-dot"></div><span>Sep 2025</span></div>
-        <div>
-          <div class="tl-role"><h3>Global AI Strategy Insight Programme</h3><span class="co">KPMG · London</span></div>
-          <ul>
-            <li>Analysed AI applications across consulting, audit, tax and advisory and their impact on client delivery</li>
-            <li>Evaluated automation opportunities and data workflows for enterprise AI implementation</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-date"><div class="tl-dot"></div><span>Aug 2025</span></div>
-        <div>
-          <div class="tl-role"><h3>Retail Protection &amp; Actuarial Insight Programme</h3><span class="co">Legal &amp; General · London</span></div>
-          <ul>
-            <li>Analysed healthcare claims data in R to assess insurance risks linked to obesity treatments and pharmaceutical trends</li>
-            <li>Presented findings to senior stakeholders, translating analysis into underwriting and product risk implications</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-date"><div class="tl-dot"></div><span>Jul 2022</span></div>
-        <div>
-          <div class="tl-role"><h3>Economics &amp; Equity Research Insight Programme</h3><span class="co">Panmure Gordon · London</span></div>
-          <ul>
-            <li>Researched macroeconomic trends and sector performance, producing briefings alongside the Chief Economist</li>
-            <li>Assessed economic developments and company news for their implications on markets and investment decisions</li>
-          </ul>
-        </div>
-      </div>
-
+    <div class="explore-grid">
+      <a class="explore-card" href="experience.html">
+        <div class="explore-tag">WORK &amp; EDUCATION</div>
+        <h3>Experience</h3>
+        <p>Rolls-Royce, KPMG, Legal &amp; General and Panmure Gordon — plus where it all started, at UCL.</p>
+        <span class="explore-link">View experience ↗</span>
+      </a>
+      <a class="explore-card" href="projects.html">
+        <div class="explore-tag">SELECTED BUILDS</div>
+        <h3>Projects</h3>
+        <p>An athlete portfolio site, a travel-planning app, and data &amp; audit tooling built along the way.</p>
+        <span class="explore-link">View projects ↗</span>
+      </a>
     </div>
   </div>
 </section>
 
-<section class="alt" id="education">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Education</h2>
-      <p class="lede">Chemistry and biology as a foundation, with data and programming layered on top.</p>
-    </div>
-    <div class="edu-grid">
-      <div class="card">
-        <div class="yr">2024 – 2027 (EXPECTED)</div>
-        <h3>University College London</h3>
-        <div class="sub">BSc Natural Sciences — Organic Chemistry &amp; Biomedical Sciences</div>
-        <ul>
-          <li>Statistical Machine Learning for Biosciences</li>
-          <li>Programming for Scientists</li>
-          <li>Pharmacology; Advanced Organic Chemistry</li>
-          <li>Electives in Python</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="yr">2016 – 2023</div>
-        <h3>St Marylebone CE School</h3>
-        <div class="sub">A Levels &amp; GCSEs</div>
-        <ul>
-          <li>A Levels: Mathematics (A), Chemistry (B), Economics (B)</li>
-          <li>10 GCSEs grades 9–7, including Mathematics (9) and English Language (7)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Projects</h2>
-      <p class="lede">Smaller builds where I wanted to see an idea working end to end, not just modelled on paper.</p>
-    </div>
-    <div class="projects">
-      <div class="card project">
-        <div class="yr">SEP 2026</div>
-        <h3>Athlete Portfolio Website</h3>
-        <p>A responsive site showcasing race results, performance progression and media coverage, turning scattered results into one clear promotional page.</p>
-        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Data structuring</span></div>
-      </div>
-      <div class="card project">
-        <div class="yr">SEP 2025</div>
-        <h3>Travel Planning Web Application</h3>
-        <p>A travel-planning app bringing destinations, flights, accommodation and transport into one platform, with data structures for dynamic itineraries.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">App design</span></div>
-      </div>
-      <div class="card project">
-        <div class="yr">JUL 2025</div>
-        <h3>Corporate Technology &amp; Audit Simulations</h3>
-        <p>Deloitte: Python scripts for data reconciliation with dashboard recommendations. KPMG: revenue analytics and audit risk assessment in Excel.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Excel</span></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="alt" id="skills">
   <div class="wrap">
@@ -934,6 +986,8 @@
   </div>
 </section>
 
+
+
 <section id="more">
   <div class="wrap">
     <div class="section-head">
@@ -962,6 +1016,8 @@
   </div>
 </section>
 
+
+
 <footer class="contact" id="contact">
   <div class="wrap">
     <div class="contact-top">
@@ -989,10 +1045,11 @@
   </div>
 </footer>
 
+
 <script>
   const siteNav = document.querySelector('.site-nav');
 
-  const revealTargets = document.querySelectorAll('.card, .tl-item, .company-banner');
+  const revealTargets = document.querySelectorAll('.card, .tl-item, .company-banner, .explore-card');
   if ('IntersectionObserver' in window && revealTargets.length){
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {

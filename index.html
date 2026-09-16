@@ -675,7 +675,13 @@
   }
   .page-loc .dot{ width:7px; height:7px; border-radius:50%; background:var(--teal); }
 
-  /* ---------- EXPLORE CARDS (index.html teaser to sub-pages) ---------- */
+  /* page-hero used mid-page (single-page site) rather than as the very first element under the nav */
+  .page-hero.inline{
+    margin-top:0;
+    padding:120px 0 84px;
+  }
+
+  /* ---------- EXPLORE CARDS (teaser links to sections further down the page) ---------- */
   .explore-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
   .explore-card{
     display:block;
@@ -737,11 +743,59 @@
   }
   .project.featured .pf-visual img{ width:100%; height:100%; object-fit:cover; display:block; }
   .project.featured .pf-badge{
-    position:absolute; top:14px; left:14px;
+    position:absolute; top:14px; left:14px; z-index:2;
     background:rgba(10,14,39,0.65); border:1px solid rgba(255,255,255,0.2);
     color:#fff; font-size:0.74rem; font-weight:700; letter-spacing:0.05em;
     padding:6px 12px; border-radius:999px;
   }
+
+  /* ---------- FEATURED PROJECT: BROWSER MOCKUP OF LIVE SITE ---------- */
+  .pf-browser{
+    width:88%;
+    border-radius:12px;
+    overflow:hidden;
+    background:#0B0F1E;
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 20px 40px -20px rgba(0,0,0,0.55);
+  }
+  .pf-browser-bar{
+    display:flex; align-items:center; gap:6px;
+    padding:9px 12px;
+    background:rgba(255,255,255,0.05);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .pf-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .pf-url{
+    margin-left:10px;
+    font-size:0.68rem;
+    color:rgba(255,255,255,0.5);
+    background:rgba(255,255,255,0.06);
+    padding:3px 10px;
+    border-radius:999px;
+    letter-spacing:0.01em;
+  }
+  .pf-browser-body{
+    padding:26px 22px 24px;
+    background:
+      radial-gradient(500px 260px at 15% 0%, rgba(124,58,237,0.28), transparent 60%),
+      radial-gradient(420px 240px at 100% 100%, rgba(20,184,166,0.18), transparent 60%),
+      #0B0F1E;
+  }
+  .pf-kicker{
+    font-size:0.64rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+    color:rgba(255,255,255,0.5); margin-bottom:10px;
+  }
+  .pf-headline{
+    font-size:1.34rem; line-height:1.18; color:#fff; margin:0 0 20px; font-weight:700;
+  }
+  .pf-headline span{
+    background:linear-gradient(90deg, var(--purple-2), var(--teal));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .pf-stats{ display:flex; gap:20px; flex-wrap:wrap; }
+  .pf-stats div{ display:flex; flex-direction:column; gap:3px; }
+  .pf-stats strong{ font-size:1.02rem; color:#fff; font-weight:800; }
+  .pf-stats span{ font-size:0.68rem; color:rgba(255,255,255,0.5); }
 
   @media (max-width:940px){
     .explore-grid{ grid-template-columns:1fr; }
@@ -750,30 +804,29 @@
 
 </style>
 </head>
-<body>
+<body id="top">
 
 <header class="site-nav">
   <div class="nav-inner">
-    <a href="index.html" class="brand" aria-label="Bo Allen — back to home">
+    <a href="#top" class="brand" aria-label="Bo Allen — back to top">
       <div class="brand-mark">BA</div>
       <div class="brand-name">Bo Allen</div>
     </a>
     <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="menuBtn"><span></span></button>
     <div class="nav-cluster">
       <nav class="links" id="navLinks">
-        <a href="index.html#story">Story</a>
-        <a href="index.html#process">Approach</a>
-        <a href="experience.html">Experience</a>
-        <a href="projects.html">Projects</a>
+        <a href="#story">Story</a>
+        <a href="#process">Approach</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
       </nav>
       <div class="nav-right">
         <a href="Bo-Allen-CV.pdf" target="_blank" rel="noopener" class="nav-cv-link">CV</a>
-        <a href="index.html#contact" class="btn btn-primary">Contact</a>
+        <a href="#contact" class="btn btn-primary">Contact</a>
       </div>
     </div>
   </div>
 </header>
-
 
 <section class="hero">
   <div class="wrap">
@@ -783,7 +836,7 @@
       <p class="hero-sub reveal d2">I'm Bo, a Natural Sciences student at UCL studying organic chemistry and biomedical sciences alongside programming and data. I'm interested in where technical ideas meet real-world problems — particularly across technology, data, strategy and applied science.</p>
       <div class="hero-actions reveal d3">
         <a href="mailto:bo.gcallen@gmail.com" class="btn btn-primary">Get in touch</a>
-        <a href="experience.html" class="btn-ghost-link">See my work ↗</a>
+        <a href="#experience" class="btn-ghost-link">See my work ↗</a>
       </div>
       <div class="hero-meta reveal d4">
         <div><strong>Based in</strong>London, UK</div>
@@ -831,8 +884,6 @@
   </div>
 </section>
 
-
-
 <section id="story">
   <div class="wrap">
     <div class="story-body">
@@ -856,8 +907,6 @@
     </div>
   </div>
 </section>
-
-
 
 <section class="alt" id="process">
   <div class="wrap">
@@ -926,32 +975,196 @@
   </div>
 </section>
 
-
-
 <section id="explore">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow" style="justify-content:center;"><span class="num">03</span><span class="rule"></span>DIVE DEEPER</div>
       <h2>Explore the work in more detail.</h2>
-      <p class="lede">Four internships and a handful of builds — each gets its own page.</p>
+      <p class="lede">Four internships and a handful of builds — a closer look at each below.</p>
     </div>
     <div class="explore-grid">
-      <a class="explore-card" href="experience.html">
+      <a class="explore-card" href="#experience">
         <div class="explore-tag">WORK &amp; EDUCATION</div>
         <h3>Experience</h3>
         <p>Rolls-Royce, KPMG, Legal &amp; General and Panmure Gordon — plus where it all started, at UCL.</p>
-        <span class="explore-link">View experience ↗</span>
+        <span class="explore-link">Jump to experience ↓</span>
       </a>
-      <a class="explore-card" href="projects.html">
+      <a class="explore-card" href="#projects">
         <div class="explore-tag">SELECTED BUILDS</div>
         <h3>Projects</h3>
         <p>An athlete portfolio site, a travel-planning app, and data &amp; audit tooling built along the way.</p>
-        <span class="explore-link">View projects ↗</span>
+        <span class="explore-link">Jump to projects ↓</span>
       </a>
     </div>
   </div>
 </section>
 
+<section class="page-hero inline" style="--ph-image:url('london-skyline.png');">
+  <div class="ph-bg"></div>
+  <div class="ph-overlay"></div>
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">04</span><span class="rule"></span>WORK &amp; EDUCATION</div>
+    <h1 class="reveal d1">Experience</h1>
+    <p class="page-sub reveal d2">Four insight programmes across engineering, strategy, insurance and finance — plus where it all started, at UCL.</p>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="justify-content:center;"><span class="num">05</span><span class="rule"></span>WORK</div>
+      <h2>Four internships, four vantage points.</h2>
+      <p class="lede">Engineering, AI strategy, insurance and equity research — different industries, the same habit of asking how decisions actually get made.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-date"><div class="tl-dot"></div><span>Sep 2026</span></div>
+        <div>
+          <div class="tl-role"><h3>Intern</h3><span class="co">Rolls-Royce · Bristol</span></div>
+          <ul>
+            <li>Gained exposure to engineering, procurement and supply strategy within Rolls-Royce's aerospace operations</li>
+            <li>Evaluated supplier selection and vendor management, weighing cost, quality, risk and delivery</li>
+            <li>Explored the cost analysis and financial modelling behind procurement decisions across the supply chain</li>
+            <li>Worked across procurement, engineering and operations teams within a global organisation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date"><div class="tl-dot"></div><span>Sep 2025</span></div>
+        <div>
+          <div class="tl-role"><h3>Global AI Strategy Insight Programme</h3><span class="co">KPMG · London</span></div>
+          <ul>
+            <li>Analysed AI applications across consulting, audit, tax and advisory and their impact on client delivery</li>
+            <li>Evaluated automation opportunities and data workflows for enterprise AI implementation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date"><div class="tl-dot"></div><span>Aug 2025</span></div>
+        <div>
+          <div class="tl-role"><h3>Retail Protection &amp; Actuarial Insight Programme</h3><span class="co">Legal &amp; General · London</span></div>
+          <ul>
+            <li>Analysed healthcare claims data in R to assess insurance risks linked to obesity treatments and pharmaceutical trends</li>
+            <li>Presented findings to senior stakeholders, translating analysis into underwriting and product risk implications</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date"><div class="tl-dot"></div><span>Jul 2022</span></div>
+        <div>
+          <div class="tl-role"><h3>Economics &amp; Equity Research Insight Programme</h3><span class="co">Panmure Gordon · London</span></div>
+          <ul>
+            <li>Researched macroeconomic trends and sector performance, producing briefings alongside the Chief Economist</li>
+            <li>Assessed economic developments and company news for their implications on markets and investment decisions</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Education</h2>
+      <p class="lede">Chemistry and biology as a foundation, with data and programming layered on top.</p>
+    </div>
+    <div class="edu-grid">
+      <div class="card">
+        <div class="yr">2024 – 2027 (EXPECTED)</div>
+        <h3>University College London</h3>
+        <div class="sub">BSc Natural Sciences — Organic Chemistry &amp; Biomedical Sciences</div>
+        <ul>
+          <li>Statistical Machine Learning for Biosciences</li>
+          <li>Programming for Scientists</li>
+          <li>Pharmacology; Advanced Organic Chemistry</li>
+          <li>Electives in Python</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="yr">2016 – 2023</div>
+        <h3>St Marylebone CE School</h3>
+        <div class="sub">A Levels &amp; GCSEs</div>
+        <ul>
+          <li>A Levels: Mathematics (A), Chemistry (B), Economics (B)</li>
+          <li>10 GCSEs grades 9–7, including Mathematics (9) and English Language (7)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-hero inline" style="--ph-image:url('london-skyline.png');">
+  <div class="ph-bg"></div>
+  <div class="ph-overlay"></div>
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="num">06</span><span class="rule"></span>SELECTED BUILDS</div>
+    <h1 class="reveal d1">Projects</h1>
+    <p class="page-sub reveal d2">Smaller builds where I wanted to see an idea working end to end, not just modelled on paper.</p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="justify-content:center;"><span class="num">07</span><span class="rule"></span>FEATURED</div>
+      <h2>Live &amp; in production.</h2>
+      <p class="lede">The build I'm most proud of is live, so you can actually click around it.</p>
+    </div>
+
+    <div class="projects">
+      <a class="card project featured" href="https://sonnyallen.vercel.app/" target="_blank" rel="noopener">
+        <div class="pf-visual">
+          <div class="pf-badge">LIVE SITE ↗</div>
+          <div class="pf-browser">
+            <div class="pf-browser-bar">
+              <span class="pf-dot" style="background:#FF5F57;"></span>
+              <span class="pf-dot" style="background:#FEBC2E;"></span>
+              <span class="pf-dot" style="background:#28C840;"></span>
+              <span class="pf-url">sonnyallen.vercel.app</span>
+            </div>
+            <div class="pf-browser-body">
+              <div class="pf-kicker">GREAT BRITAIN U18 &middot; HIGHGATE HARRIERS</div>
+              <h4 class="pf-headline">UK #1. <span>Age 16.</span> Still rising.</h4>
+              <div class="pf-stats">
+                <div><strong>#1</strong><span>UK U18 rank &middot; 1500m</span></div>
+                <div><strong>4:22.03</strong><span>1500m PB</span></div>
+                <div><strong>&minus;64s</strong><span>1500m improvement</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="yr">SEP 2026 · LIVE PROJECT</div>
+          <h3>Athlete Portfolio Website</h3>
+          <p>Built and shipped a full promotional site for a GB U18 athlete — race results, performance progression, media coverage and press, pulled into one page recruiters and sponsors can actually navigate.</p>
+          <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Data structuring</span><span class="tag">Responsive design</span></div>
+          <span class="project-live">View live site — sonnyallen.vercel.app ↗
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <div class="card project">
+        <div class="yr">SEP 2025</div>
+        <h3>Travel Planning Web Application</h3>
+        <p>A travel-planning app bringing destinations, flights, accommodation and transport into one platform, with data structures for dynamic itineraries.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">App design</span></div>
+      </div>
+      <div class="card project">
+        <div class="yr">JUL 2025</div>
+        <h3>Corporate Technology &amp; Audit Simulations</h3>
+        <p>Deloitte: Python scripts for data reconciliation with dashboard recommendations. KPMG: revenue analytics and audit risk assessment in Excel.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Excel</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="alt" id="skills">
   <div class="wrap">
@@ -986,8 +1199,6 @@
   </div>
 </section>
 
-
-
 <section id="more">
   <div class="wrap">
     <div class="section-head">
@@ -1016,13 +1227,11 @@
   </div>
 </section>
 
-
-
 <footer class="contact" id="contact">
   <div class="wrap">
     <div class="contact-top">
       <div>
-        <div class="eyebrow"><span class="num">04</span><span class="rule"></span>NEXT STEP</div>
+        <div class="eyebrow"><span class="num">08</span><span class="rule"></span>NEXT STEP</div>
         <h2>Let's talk about where this could go next.</h2>
         <p>Open to internships and roles that sit at the intersection of analysis, strategy and something worth building.</p>
         <div class="hero-actions" style="margin-top:28px;">
@@ -1044,7 +1253,6 @@
     </div>
   </div>
 </footer>
-
 
 <script>
   const siteNav = document.querySelector('.site-nav');
@@ -1106,6 +1314,5 @@
     });
   });
 </script>
-
 </body>
 </html>

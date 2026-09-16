@@ -296,6 +296,59 @@
   }
   .pill .dot{ width:7px; height:7px; border-radius:50%; background:var(--teal); }
   .hero-panel svg{ width:100%; height:auto; margin:14px 0; }
+
+  /* ---------- MOLECULE VISUAL (replaces line chart) ---------- */
+  .molecule{ position:relative; width:100%; aspect-ratio:320/216; margin:16px 0 22px; }
+  .molecule svg{ width:100%; height:100%; display:block; overflow:visible; margin:0; }
+  .molecule .bond{ stroke:url(#ringGrad); stroke-width:1.4; opacity:0.55; }
+  .molecule .core{ stroke:url(#ringGrad); stroke-width:1.1; opacity:0.3; stroke-dasharray:3 5; fill:none; }
+  .molecule-hint{
+    font-size:0.68rem; color:rgba(255,255,255,0.4); text-align:center;
+    letter-spacing:0.03em; margin-top:-6px;
+  }
+  .atom{
+    position:absolute; left:var(--x); top:var(--y);
+    width:0; height:0; transform:translate(-50%,-50%);
+    display:flex; align-items:center; justify-content:center;
+    z-index:2; text-decoration:none;
+  }
+  .atom-dot{
+    width:14px; height:14px; border-radius:50%;
+    background:var(--ac); display:block;
+    box-shadow:0 0 0 4px rgba(255,255,255,0.07), 0 0 16px 1px var(--ac);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .atom:hover .atom-dot, .atom:focus-visible .atom-dot{
+    transform:scale(1.4);
+    box-shadow:0 0 0 6px rgba(255,255,255,0.14), 0 0 24px 5px var(--ac);
+  }
+  .atom-tip{
+    position:absolute; bottom:calc(100% + 13px); left:50%;
+    transform:translate(-50%,5px);
+    width:172px; background:#fff; color:var(--ink);
+    border-radius:12px; padding:11px 13px;
+    box-shadow:0 20px 40px -14px rgba(10,14,39,0.5);
+    opacity:0; pointer-events:none;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .atom-tip:after{
+    content:""; position:absolute; top:100%; left:50%;
+    transform:translateX(-50%); width:10px; height:10px;
+    background:#fff; clip-path:polygon(0 0,100% 0,50% 100%);
+  }
+  .atom-tip b{ display:block; font-size:0.82rem; font-weight:700; margin-bottom:2px; }
+  .atom-tip small{ display:block; font-size:0.7rem; color:var(--muted); line-height:1.35; }
+  .atom-tip em{
+    display:inline-block; font-style:normal; font-size:0.62rem; font-weight:700;
+    letter-spacing:0.05em; text-transform:uppercase; color:var(--purple);
+    margin-top:5px;
+  }
+  .atom:hover .atom-tip, .atom:focus-visible .atom-tip{
+    opacity:1; transform:translate(-50%,0);
+  }
+  @media (max-width:640px){
+    .atom-tip{ width:150px; font-size:0.9em; }
+  }
   .float-card{
     position:absolute;
     bottom:-26px; right:-18px;
@@ -845,24 +898,49 @@
       <div class="corner br"></div>
       <div class="hero-panel">
         <div class="pill"><span class="dot"></span>UCL · Natural Sciences</div>
-        <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="10" y1="170" x2="310" y2="170" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
-          <line x1="10" y1="10" x2="10" y2="170" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
-          <polyline points="10,140 60,120 110,132 160,60 210,42 300,14" fill="none" stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="10" cy="140" r="4.5" fill="#A78BFA"/>
-          <circle cx="60" cy="120" r="4.5" fill="#A78BFA"/>
-          <circle cx="110" cy="132" r="4.5" fill="#60A5FA"/>
-          <circle cx="160" cy="60" r="4.5" fill="#60A5FA"/>
-          <circle cx="210" cy="42" r="4.5" fill="#2DD4BF"/>
-          <circle cx="300" cy="14" r="6" fill="#2DD4BF"/>
-          <defs>
-            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#A78BFA"/>
-              <stop offset="55%" stop-color="#60A5FA"/>
-              <stop offset="100%" stop-color="#2DD4BF"/>
-            </linearGradient>
-          </defs>
-        </svg>
+
+        <div class="molecule">
+          <svg viewBox="0 0 320 216" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#A78BFA"/>
+                <stop offset="50%" stop-color="#60A5FA"/>
+                <stop offset="100%" stop-color="#2DD4BF"/>
+              </linearGradient>
+            </defs>
+            <!-- hexagon bonds -->
+            <polygon class="bond" points="160,33 226,72 226,150 160,189 94,150 94,72" fill="none"/>
+            <!-- aromatic ring -->
+            <circle class="core" cx="160" cy="111" r="47"/>
+          </svg>
+
+          <a class="atom" href="experience.html#rolls-royce" style="--x:50%; --y:15.3%; --ac:#2DD4BF;">
+            <span class="atom-dot"></span>
+            <span class="atom-tip"><b>Rolls&#8209;Royce</b><small>Aerospace supply chain, Bristol</small><em>View role ↗</em></span>
+          </a>
+          <a class="atom" href="experience.html#kpmg" style="--x:70.6%; --y:33.3%; --ac:#60A5FA;">
+            <span class="atom-dot"></span>
+            <span class="atom-tip"><b>KPMG</b><small>Global AI Strategy Insight Programme</small><em>View role ↗</em></span>
+          </a>
+          <a class="atom" href="experience.html#legal-general" style="--x:70.6%; --y:69.4%; --ac:#A78BFA;">
+            <span class="atom-dot"></span>
+            <span class="atom-tip"><b>Legal &amp; General</b><small>Retail protection &amp; actuarial analysis</small><em>View role ↗</em></span>
+          </a>
+          <a class="atom" href="experience.html#panmure-gordon" style="--x:50%; --y:87.5%; --ac:#7C3AED;">
+            <span class="atom-dot"></span>
+            <span class="atom-tip"><b>Panmure Gordon</b><small>Economics &amp; equity research</small><em>View role ↗</em></span>
+          </a>
+          <a class="atom" href="projects.html" style="--x:29.4%; --y:69.4%; --ac:#60A5FA;">
+            <span class="atom-dot"></span>
+            <span class="atom-tip"><b>Building things</b><small>Web builds, Python &amp; R projects</small><em>See projects ↗</em></span>
+          </a>
+          <a class="atom" href="#story" style="--x:29.4%; --y:33.3%; --ac:#2DD4BF;">
+            <span class="atom-dot"></span>
+            <span class="atom-tip"><b>Natural Sciences</b><small>Organic chemistry &amp; biomedical sciences, UCL</small><em>Read more ↗</em></span>
+          </a>
+        </div>
+        <div class="molecule-hint">Hover the ring to explore ↗</div>
+
         <div class="pill" style="align-self:flex-start;">London, UK</div>
       </div>
       <div class="float-card">
